@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+此檔案是由您 Web 專案的發行/封裝處理程序所使用。您可以編輯此 MSBuild 檔案，
+以自訂此處理程序的行為。若要深入了解，請造訪 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>Z:\_IIS_Light\_api</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/NovelReader.dll">
+      <publishTime>08/13/2015 18:43:15</publishTime>
+    </File>
+    <File Include="bin/NovelReader.xml">
+      <publishTime>08/13/2015 18:43:15</publishTime>
+    </File>
+    <File Include="novel.ashx">
+      <publishTime>08/13/2015 16:40:35</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/13/2015 16:38:06</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/13/2015 16:41:01</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

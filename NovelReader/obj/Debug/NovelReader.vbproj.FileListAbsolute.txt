@@ -1,0 +1,9 @@
+Z:\VB\NovelReader\NovelReader\bin\NovelReader.dll.config
+Z:\VB\NovelReader\NovelReader\bin\NovelReader.dll
+Z:\VB\NovelReader\NovelReader\bin\NovelReader.pdb
+Z:\VB\NovelReader\NovelReader\bin\NovelReader.xml
+Z:\VB\NovelReader\NovelReader\obj\Debug\NovelReader.Resources.resources
+Z:\VB\NovelReader\NovelReader\obj\Debug\NovelReader.vbproj.GenerateResource.Cache
+Z:\VB\NovelReader\NovelReader\obj\Debug\NovelReader.dll
+Z:\VB\NovelReader\NovelReader\obj\Debug\NovelReader.xml
+Z:\VB\NovelReader\NovelReader\obj\Debug\NovelReader.pdb
