@@ -1,12 +1,11 @@
 <html><head><meta charset="UTF-8"><title>Novel</title></head><body><style>body{background-color: #2a2a2a;color: #C0c0c0;padding: 10%;}</style><div id=main></div><script src="public_.js"></script><script src="hjwzw.js"></script><script>
 function QueryString(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),results = regex.exec(location.search);return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));}
 if (typeof String.prototype.startsWith != 'function') {String.prototype.startsWith = function (str){return this.indexOf(str) === 0;};}
-if ( QueryString("n") === ""){
-	document.getElementById("main").innerhtml+= about();
+if ( QueryString("n") === "" || QueryString("n") === null){
+	document.getElementById("main").innerHTML= about();
 }else{
 	if (!analy(QueryString("n"))){
-		document.write("<h1>錯誤信息: 不支援的網站</h1>");
-		document.write(about());
+		document.getElementById("main").innerHTML="<h1>錯誤信息: 不支援的網站</h1>"+about();
 	}
 }
 function analy(url){
