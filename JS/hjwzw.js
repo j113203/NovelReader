@@ -6,10 +6,10 @@ function hjwzw_get_(id, about){
 		b.onload = function(){
 								try {
 									var innerDoc = b.contentDocument || b.contentWindow.document;
-									document.write(innerDoc.getElementById("Lab_Contents").innerHTML)
+									document.getElementById("main").innerHTML=innerDoc.getElementById("Lab_Contents").innerHTML;
 								}
 								catch(ex) {
-									document.getElementById("main").innerHTML="<h1>錯誤信息: "+ex+"</h1>"+ about
+									document.getElementById("main").innerHTML="<h1>錯誤信息: "+ex+"</h1>"+ about;
 									
 								}	
 								
