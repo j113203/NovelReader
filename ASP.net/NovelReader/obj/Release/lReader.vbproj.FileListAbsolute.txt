@@ -1,0 +1,10 @@
+Z:\VB\NovelReader\ASP.net\NovelReader\bin\NovelReader.dll.config
+Z:\VB\NovelReader\ASP.net\NovelReader\bin\NovelReader.dll
+Z:\VB\NovelReader\ASP.net\NovelReader\bin\NovelReader.pdb
+Z:\VB\NovelReader\ASP.net\NovelReader\bin\NovelReader.xml
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\NovelReader.Resources.resources
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\lReader.vbproj.GenerateResource.Cache
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\NovelReader.dll
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\NovelReader.xml
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\NovelReader.pdb
+Z:\VB\NovelReader\ASP.net\NovelReader\obj\Release\lReader.vbprojResolveAssemblyReference.cache

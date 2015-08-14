@@ -1,4 +1,4 @@
-﻿Public Class hjwzw2
+﻿Public Class hjwzw
     Dim public_ As New public_
     Function get_(id As String, about As String) As String
         Try

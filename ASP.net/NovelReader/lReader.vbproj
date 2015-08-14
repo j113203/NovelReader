@@ -91,9 +91,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hjwzw2.vb" />
-    <Compile Include="novel.ashx.vb">
-      <DependentUpon>novel.ashx</DependentUpon>
+    <Compile Include="85novel.vb" />
+    <Compile Include="force.vb" />
+    <Compile Include="hackpad.vb" />
+    <Compile Include="hjwzw.vb" />
+    <Compile Include="reader.ashx.vb">
+      <DependentUpon>reader.ashx</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -125,7 +128,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="novel.ashx" />
+    <Content Include="reader.ashx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
