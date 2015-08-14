@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">EyeCareReader</string>
+    <string name="textbox">小說章節網址</string>
+    <string name="action_settings">Settings</string>
+    <string name="buttons">Read</string>
+</resources>

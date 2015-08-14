@@ -31,7 +31,7 @@ Public Class index
                     Dim a As New hjwzw
                     .Response.Write(a.get_(URL.Substring(URL.LastIndexOf("/") + 1), about))
                     Return True
-                ElseIf URL.ToLower.StartsWith("https://hackpad.com/") Or URL.ToLower.StartsWith("http://hackpad.com/--") Then
+                ElseIf URL.ToLower.StartsWith("https://hackpad.com/") Or URL.ToLower.StartsWith("http://hackpad.com/") Then
                     Dim a As New hackpad
                     .Response.Write(a.get_(URL.Substring(URL.LastIndexOf("-") + 1), about))
                     Return True
