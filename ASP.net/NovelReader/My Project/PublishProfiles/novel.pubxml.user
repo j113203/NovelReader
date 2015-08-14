@@ -10,10 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/NovelReader.dll">
-      <publishTime>08/14/2015 11:07:05</publishTime>
+      <publishTime>08/14/2015 11:43:46</publishTime>
     </File>
     <File Include="bin/NovelReader.xml">
-      <publishTime>08/14/2015 11:07:05</publishTime>
+      <publishTime>08/14/2015 11:43:46</publishTime>
     </File>
     <File Include="novel.ashx">
       <publishTime>08/13/2015 16:40:35</publishTime>

@@ -23,6 +23,7 @@ Public Class index
         End With
     End Sub
     Function Analy(URL As String) As Boolean
+        If Not URL.ToLower.StartsWith("http") Then URL = "http://" + URL
         With Novel
             Dim about As String = public_.about(.Request.Url.Scheme + "://" + .Request.Url.Authority + .Request.Path)
             Try
@@ -34,7 +35,7 @@ Public Class index
                     Dim a As New hackpad
                     .Response.Write(a.get_(URL.Substring(URL.LastIndexOf("-") + 1), about))
                     Return True
-                ElseIf URL.ToLower.StartsWith("http://www.85novel.com/book/")
+                ElseIf URL.ToLower.StartsWith("http://www.85novel.com/book/") Or URL.ToLower.StartsWith("http://gb.85novel.com/book/") Then
                     Dim b() As String = URL.Split("/")
                     Dim a As New _85novel
                     .Response.Write(a.get_(b(4) + "/" + b(5).Substring(0, b(5).IndexOf(".")), about))
