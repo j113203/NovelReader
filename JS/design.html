@@ -262,11 +262,11 @@
             return r;
         },
         handler:function(e){
-            if(this.offsetHeight + this.scrollTop == this.scrollHeight)
+            if(this.offsetHeight + this.scrollTop +200> this.scrollHeight)
             {
                 this.onscroll="";
                 $.novel.read__($.novel.cache.title,$.novel.cache.provider,$.novel.cache.next,function(e){
-                    $("novel").innerHTML+="<br>"+e.body;
+                    $("novel").innerHTML+="<br><br>"+e.body;
                     $.novel.cache=e;
                     $.result.init();
                 });
