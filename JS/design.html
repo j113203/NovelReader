@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-hk">
+
+<head>
+    <meta charset="utf-8">
+    <title>小說</title>    
+    <meta name="author" content="j1Lib">
+</head>
+<body>
+    <loading></loading>
+    <search>
+        <input type="text"/><msg>Search</msg>
+    </search>
+    <result>
+        <novel></novel>
+    </result>
+</body>
+<style>
+/*@GH/murtaugh/HTML5-Reset*/a,hr{padding:0}a,button,input,select,textarea{margin:0}article,aside,details,figure,footer,header,hr,main,nav,section,summary{display:block}abbr,address,article,aside,audio,b,blockquote,body,body div,caption,cite,code,dd,del,details,dfn,dl,dt,em,fieldset,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font-weight:400;vertical-align:baseline;background:0 0}input[type=checkbox],th{vertical-align:bottom}html{box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}embed,img,object{max-width:100%}ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{font-size:100%;vertical-align:baseline;background:0 0}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted #000;cursor:help}th{font-weight:700}td{font-weight:400;vertical-align:top}hr{height:1px;border:0;border-top:1px solid #ccc;margin:1em 0}input,select{vertical-align:middle}pre{white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word}input[type=radio]{vertical-align:text-bottom}.ie7 input[type=checkbox]{vertical-align:baseline}.ie6 input{vertical-align:text-bottom}input,select,textarea{font:99% sans-serif}table{border-collapse:separate;border-spacing:0;font:100%}small{font-size:85%}strong{font-weight:700}td,td img{vertical-align:top}sub,sup{font-size:75%;line-height:0;position:relative}sup{top:-.5em}sub{bottom:-.25em}code,kbd,pre,samp{font-family:monospace,sans-serif}.clickable,button,input[type=button],input[type=file],input[type=submit],label{cursor:pointer}button,input[type=button]{width:auto;overflow:visible}.ie7 img{-ms-interpolation-mode:bicubic}.clearfix:after{content:" ";display:block;clear:both}</style>
+<style>
+	@font-face {
+        font-family: '華康儷粗圓';
+        src: url('華康儷粗圓.TTC');        
+    }
+    @font-face {
+        font-family: '華康儷細黑';
+        src: url('華康儷細黑.TTC');        
+    }
+    html,body{
+        height: 100%;
+        width: 100%;
+        font-family: '華康儷細黑';
+        font-size: 16px;
+        overflow: hidden;
+    }
+    loading{
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url("squares.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 5vh;
+    }
+    search{
+        position: absolute;
+        right: 0px;
+        top: 10vh;
+        display: block;
+        background-color: #212121;
+        width: 8vh;
+        height: 8vh;
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        background-image: url("search.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 3vh;
+        color: white;
+    }
+    search>input{
+        display: none;
+        position: absolute;
+        top: 0vh;
+        right: 0px;
+        width: 22vh;
+        height: 8vh;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-family: '華康儷細黑';      
+    }
+    search>msg{
+        display: none;
+        height: 8vh;
+        line-height: 8vh;
+        text-align: center;
+        width: 100%;
+    }
+    result{
+        display: block;
+        width: 105%;
+        height: 100%;
+        padding: 3vh;
+        overflow-y: scroll;
+    }    
+    result>item>name{
+        max-height: 1em;
+        overflow: hidden;
+        padding: 0;
+        display: block;
+        font-size: 8vh;
+        line-height: 9vh;
+    }
+    result>item>chapter{
+        max-height: 1em;
+        overflow: hidden;
+        display: block;
+        margin-bottom: 1vh;
+    }
+    result>item:nth-of-type(1)>name{
+        font-size: 10vh;
+        line-height: 11vh;
+    }
+    result>item:nth-of-type(2)>name{
+        font-size: 9vh;
+        line-height: 10vh;
+    }
+    result>novel{
+        font-family: '華康儷粗圓';
+        display: block;
+        width: 96%;
+    }
+</style>  
+<script defer>
+    var Parser = {    
+        ajax : {
+            get : function(url,success,error){
+                var r = new XMLHttpRequest;
+                r.onerror = error;
+                r.onload = function(){
+                    if (r.status==200){
+                        success(r.responseText.replace(/(\r\n|\n|\r)/gm,""));
+                    }else{
+                        error();
+                    }
+                };
+                r.open("get","https://dry-sierra-94326.herokuapp.com/"+url,true);
+                r.send();
+            },
+            jsonp : function(url, success , error){
+                (function(jsonp_callback){
+                    Parser.ajax.garbage[jsonp_callback] = function(data){
+                        success(data);
+                        Parser.ajax.garbage[jsonp_callback]=null;
+                    };
+                    var r = document.createElement('script');
+                    r.src = url+"&callback=Parser.ajax.garbage["+jsonp_callback+"]&nocache="+new Date().getTime();
+                    r.onerror = error;
+                    document.getElementsByTagName('head')[0].appendChild(r);
+                })(Math.floor(Math.random() * 1e10));
+            },
+            garbage : {}
+        }
+    };
+    var $=function(id,n){
+        return document.getElementsByTagName(id)[n||0]
+    };
+    $.init={
+        _:function(n){
+             document.body.style[n]=document.body.getBoundingClientRect()[n];             
+        },
+        do:function(){
+            this._["width"];
+            this._["height"];
+            $.search.init();
+            $.result.init();
+        }
+    }
+    $.show=function(e){
+        e.style.display="block";
+        return e;
+    };
+    $.hide=function(e){
+        e.style.display="none";
+        return e;
+    };
+    $.loading={
+        e:$("loading"),
+        hide:function(){
+            $.hide(this.e);
+            $.search.hide();
+            $.hide($.search.m).innerHTML="";
+            $.search.e.style.backgroundSize="3vh";
+        },
+        show:function(msg){            
+            $.show(this.e);
+            $.search.show();
+            $.show($.search.m).innerHTML=msg||"";
+            $.hide($.search.i);
+            $.search.e.style.backgroundSize="0";    
+        }
+    };
+    $.search={
+        e:$("search"),
+        i:$("input"),
+        m:$("msg"),
+        status:false,
+        handler:function(e){
+            if (this==e.target){
+                if ($.search.status){
+                    $.search.hide();
+                }else{
+                    $.search.show();                   
+                }
+                $.search.status=!$.search.status;
+            };
+        },
+        hide:function(){
+            $.search.e.style.width="8vh";
+            $.hide($.search.i);
+        },
+        show:function(){
+            $.search.e.style.width="30vh";
+            $.search.e.style.backgroundPosition="3vh";
+            $.show($.search.i);
+        },
+        ihandler:function(e){        
+            console.log();    
+            if (e.which==13&&this.value.length){                
+                $.loading.show("Google 搜尋");
+                $.search.search(this.value,function(data){
+                    $.loading.hide();
+                    $.result.clear();
+                    for (var i in data){
+                        (function(i){
+                            $.result.add(i.titleNoFormatting,i.unescapedUrl).onclick=function(){
+                                  $.novel.read(i.titleNoFormatting,i.visibleUrl,i.unescapedUrl);
+                            };
+                        })(data[i]);
+                    }
+                },function(){
+                    $.loading.hide();
+                    $.result.clear().add("找不到符合","");
+                });
+            }
+        },
+        init:function(){
+            this.e.onclick=this.handler;
+            this.i.onkeypress=this.ihandler;
+        },
+        search:function(keyword,success,error){
+            if (keyword && keyword.length){
+                var key = "AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY";
+                var url = "https://www.googleapis.com/customsearch/v1element?key="+key+"&rsz=filtered_cse&num=20&hl=zh_TW&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=010594058651296614135:krqzuemxu-y&q="+keyword+"&sort=&googlehost=www.google.com&oq="+keyword+"&gs_l=partner.12...7116.7924.1.12989.5.5.0.0.0.0.88.426.5.5.0.gsnos%2Cn%3D13...0.784j168806j6..1ac.1.25.partner..10.0.0._F_7XCuqoy0";
+                Parser.ajax.jsonp(url,function(data){
+                    if (data.results.length){
+                        success(data.results);
+                    }else{
+                        error();
+                    }
+                },error);
+            }else{
+                error();
+            }
+        }
+    };
+    $.result={
+        e:$("result"),
+        clear:function(n){
+            this.e.innerHTML="<novel></novel>";
+            n=n||0;
+            while (n-->0){
+                this.add("&nbsp;","&nbsp;");
+            }
+            return this;
+        },
+        add:function(n,c){
+            var r = document.createElement('item');
+            r.innerHTML+="<name>"+n+"</name><chapter>"+c+"</chapter>";
+            this.e.appendChild(r);
+            return r;
+        },
+        handler:function(e){
+            if(this.offsetHeight + this.scrollTop == this.scrollHeight)
+            {
+                this.onscroll="";
+               console.log("End");
+            }
+        },
+        init:function(){
+            this.e.onscroll=this.handler;
+        }
+    };
+    $.novel={
+        id:function(url){
+            return url.split("/").pop().split(".")[0];
+        },        
+        db:{
+            core:{
+                divfromId:function(data,id){
+                    return new RegExp('id="'+id+'">(.*?)<\/div>',"g").exec(data)[1];
+                }
+            },
+            template:{
+                a:function(domain,read,title){
+                    return {
+                        "domain": domain,
+                        read:function(data){
+                            return $.novel.db.core.divfromId(data,read);
+                        },
+                        title:function(data){
+                            return $.novel.db.core.divfromId(data,title);
+                        }
+                    }
+                }
+            }
+        },
+        read : function(title,provider,url){
+            $.result.clear();
+            $.loading.show(title);
+            var provider_ = this.db[provider];
+            Parser.ajax.get(provider_.domain+provider_.toc(url),function(data){                
+                $.novel.read_(title,provider,provider_.fc(data));
+            });
+        },
+        read_ : function(title,provider,url){                
+            var provider_ = this.db[provider];               
+            Parser.ajax.get(provider_.domain+url,function(data){
+                 $.loading.hide();                 
+                 $("novel").innerHTML="<h3>"+provider_.title(data)+"</h3><br>"+provider_.read(data);                
+            });            
+        }
+    };
+    $.init.do();
+    $.result.clear();
+    $.result.add("空空的書架",""); 
+
+    $.novel.db["www.ftxs.org"]=$.novel.db.template.a("http://m.ftxs.org/","nr1","nr_title");
+    $.novel.db["www.ftxs.org"].toc=function(url){
+       return "wapbook-"+$.novel.id(url)+"_1/";
+    };
+    $.novel.db["www.ftxs.org"].fc=function(data){
+       return /<li><a href='(\/wapbook-.*?\/)/g.exec(data)[1];
+    };
+</script>
+</html>

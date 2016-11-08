@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-hk">
+
+<head>
+    <meta charset="utf-8">
+    <title>小說</title>    
+    <meta name="author" content="j1Lib">
+</head>
+<body>
+    <header><a>書架</a><search></search><input type="text"/></header>
+    <name></name>
+    <store></store>
+    <novel></novel>
+</body>
+<style>
+/*@GH/murtaugh/HTML5-Reset*/a,hr{padding:0}a,button,input,select,textarea{margin:0}article,aside,details,figure,footer,header,hr,main,nav,section,summary{display:block}abbr,address,article,aside,audio,b,blockquote,body,body div,caption,cite,code,dd,del,details,dfn,dl,dt,em,fieldset,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font-weight:400;vertical-align:baseline;background:0 0}input[type=checkbox],th{vertical-align:bottom}html{box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}embed,img,object{max-width:100%}ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{font-size:100%;vertical-align:baseline;background:0 0}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted #000;cursor:help}th{font-weight:700}td{font-weight:400;vertical-align:top}hr{height:1px;border:0;border-top:1px solid #ccc;margin:1em 0}input,select{vertical-align:middle}pre{white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word}input[type=radio]{vertical-align:text-bottom}.ie7 input[type=checkbox]{vertical-align:baseline}.ie6 input{vertical-align:text-bottom}input,select,textarea{font:99% sans-serif}table{border-collapse:separate;border-spacing:0;font:100%}small{font-size:85%}strong{font-weight:700}td,td img{vertical-align:top}sub,sup{font-size:75%;line-height:0;position:relative}sup{top:-.5em}sub{bottom:-.25em}code,kbd,pre,samp{font-family:monospace,sans-serif}.clickable,button,input[type=button],input[type=file],input[type=submit],label{cursor:pointer}button,input[type=button]{width:auto;overflow:visible}.ie7 img{-ms-interpolation-mode:bicubic}.clearfix:after{content:" ";display:block;clear:both}</style>
+<style>
+	@font-face {
+        font-family: '華康儷粗圓';
+        src: url('華康儷粗圓.TTC');
+    }
+
+    html,body{
+        height: 100%;
+        width: 100%;
+    }
+
+    body{
+        font-family: '華康儷粗圓';
+        font-size: 2vh;
+    }
+    
+    ::-webkit-scrollbar{height:16px; width:16px;}
+    ::-webkit-scrollbar-button{height:0; width:0;}
+    ::-webkit-scrollbar-button:start:decrement,
+    ::-webkit-scrollbar-button:end:increment{display:block;}
+    ::-webkit-scrollbar-button:vertical:start:increment,
+    ::-webkit-scrollbar-button:vertical:end:decrement{display:none;}
+    ::-webkit-scrollbar-track:vertical,
+    ::-webkit-scrollbar-track:horizontal,
+    ::-webkit-scrollbar-thumb:vertical,
+    ::-webkit-scrollbar-thumb:horizontal{border-style:solid; border-color:transparent;}
+    ::-webkit-scrollbar-track:vertical{background-clip:padding-box; background-color:#fff; border-left-width:5px; border-right-width:0;}
+    ::-webkit-scrollbar-track:horizontal{background-clip:padding-box; background-color:#fff; border-bottom-width:0; border-top-width:5px;}
+    ::-webkit-scrollbar-thumb{-webkit-box-shadow:inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07); background-clip:padding-box; background-color:rgba(0,0,0,.2); min-height:28px;padding-top:100px}
+    ::-webkit-scrollbar-thumb:hover{-webkit-box-shadow:inset 1px 1px 1px rgba(0,0,0,.25); background-color:rgba(0,0,0,.4);}
+    ::-webkit-scrollbar-thumb:active{-webkit-box-shadow:inset 1px 1px 3px rgba(0,0,0,.35); background-color:rgba(0,0,0,.5);}
+    ::-webkit-scrollbar-thumb:vertical{border-width:0; border-left-width:5px;}
+    ::-webkit-scrollbar-thumb:horizontal{border-width:0; border-top-width:5px;}
+    ::-webkit-scrollbar-track:hover{-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.1); background-color:rgba(0,0,0,.05);}
+    ::-webkit-scrollbar-track:active{-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.14), inset -1px -1px 0 rgba(0,0,0,.07); background-color:rgba(0,0,0,.05);}
+
+    header{
+        display: block;
+        width: 100%;
+        height: 10vh;
+        background-color: #212121;
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        color: white;
+        line-height:  10vh;
+        font-size: 5vh;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    header>search{
+        display: block;
+        float: right;
+        width: 40px;
+        height: 100%;
+        background-image: url("search.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 3vh;
+    }
+    header>input{
+        display: block;
+        float: right;
+        width: 4em;
+        margin-right: 0.5em;
+        margin-top: 2vh;
+    }
+    name{
+        display: none;
+        padding: 30px 50px;
+    }
+    store{
+        display: block;
+        padding: 30px 50px;
+        height: 87vh;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+    store>item{
+        display: block;
+        margin-bottom: 2vh;
+        border-bottom: 1px solid black;
+    }
+    store>item>name{
+        padding: 0;
+        display: block;
+        font-size: 4vh;
+        line-height: 5vh;
+    }
+    store>item>chapter{
+        display: block;
+        margin-bottom: 1vh;
+    }
+    novel{
+        display: block;
+        display: none;
+        padding: 30px 50px;        
+        height: 80vh;
+        overflow: hidden;
+        overflow-y: auto;
+        width: 100%;       
+    }    
+</style>
+<script defer>
+document.getElementsByTagName("search")[0].onclick = document.getElementsByTagName("input")[0].onkeypress = function(e){
+    if (e.which==13||e.which==1){
+        var keyword = e.value || document.getElementsByTagName("input")[0].value;            
+        Parser.Novel.store.clear();
+        Parser.Novel.meta.set("搜尋: "+keyword); 
+        Parser.Novel.search(keyword,function(url){
+            if (url){
+                Parser.Novel.store.push(url[0],url[1]).onclick=function(){
+                    Parser.Novel.parser.read(keyword,url[0],url[1]);
+                }; 
+            }else{
+                Parser.Novel.store.push("未找到符合的小說","");
+            }
+        });
+    };
+};
+var Parser = {    
+    ajax : {
+        get : function(url,success,error){
+            var r = new XMLHttpRequest;
+            r.onerror = error;
+            r.onload = function(){
+                if (r.status==200){
+                    success(r.responseText.replace(/(\r\n|\n|\r)/gm,""));
+                }else{
+                    error();
+                }
+            };
+            r.open("get","https://crossorigin.me/"+url,true);
+            r.send();
+        },
+        jsonp : function(url, success , error){
+            (function(jsonp_callback){
+                Parser.ajax.garbage[jsonp_callback] = function(data){
+                    success(data);
+                    Parser.ajax.garbage[jsonp_callback]=null;
+                };
+                var r = document.createElement('script');
+                r.src = url+"&callback=Parser.ajax.garbage["+jsonp_callback+"]";
+                r.onerror = error;
+                document.getElementsByTagName('head')[0].appendChild(r);
+            })(Math.floor(Math.random() * 1e10));
+        },
+        garbage : {}
+    },
+    Novel : {
+        cache : {
+            io: {
+                flok : function(){
+                    Parser.Novel.cache.get=JSON.parse(localStorage.getItem("novel"));
+                },
+                commit : function(){
+                    localStorage.setItem("novel",JSON.stringify(Parser.Novel.cache.get));
+                }
+            },
+            get : {},
+            save : function(title,chapter,provider,url){                
+                this.get[provider+"_"+title]={
+                    name:title,
+                    chapter:chapter,
+                    provider:provider,
+                    url:url
+                };
+                this.io.commit();
+            }
+        },
+        index : function(){
+            this.store.clear();
+            this.meta.clear();
+            this.novel.clear();
+            this.cache.io.flok();
+            for (var i in this.cache.get){
+                (function(i,store){
+                    store.push(i.name,i.chapter).onclick=function(){
+                        Parser.Novel.parser.read_(i.name,i.provider,i.url);
+                    }; 
+                })(this.cache.get[i],this.store);
+            }          
+        },
+        meta : {
+            e: document.getElementsByTagName("name")[0],
+            clear : function(){                
+                this.e.style.display="none";
+                Parser.Novel.store.e.style.height = "87vh";
+            },
+            set : function(chapter){
+                this.e.style.display="block";
+                Parser.Novel.store.e.style.height = "80vh";
+                this.e.innerHTML = chapter;
+            }
+        },
+        search : function(keyword,callback){
+            if (keyword && keyword.length){
+                var key = "AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY";
+                var url = "https://www.googleapis.com/customsearch/v1element?key="+key+"&rsz=filtered_cse&num=1&hl=zh_TW&prettyPrint=true&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=010594058651296614135:krqzuemxu-y&q="+keyword+"&sort=&googlehost=www.google.com&oq="+keyword+"&gs_l=partner.12...7116.7924.1.12989.5.5.0.0.0.0.88.426.5.5.0.gsnos%2Cn%3D13...0.784j168806j6..1ac.1.25.partner..10.0.0._F_7XCuqoy0&nocache=1478536213954";
+                Parser.ajax.jsonp(url,function(data){
+                    if (data.results.length&&keyword==data.results[0].titleNoFormatting){
+                        callback([data.results[0].visibleUrl,data.results[0].unescapedUrl]);
+                    }else{
+                    callback();
+                    }
+                },function(){
+                    callback();
+                });
+            }else{
+                Parser.Novel.index();
+            } 
+        },
+        store : {
+            e : document.getElementsByTagName("store")[0],
+            clear : function(){
+                this.e.innerHTML="";
+                this.e.style.display="none";
+            },
+            push : function(name,chapter){
+                this.e.style.display="block";
+                var r = document.createElement('item');
+                r.innerHTML+="<name>"+name+"</name><chapter>"+chapter+"</chapter>";
+                this.e.appendChild(r);
+                return r;
+            }
+        },
+        novel : {
+            e : document.getElementsByTagName("novel")[0],
+            clear : function(){
+                this.e.innerHTML="";
+                this.e.style.display="none";
+            },
+            push : function(text){
+                this.e.style.display="block";
+                this.e.innerHTML = text;
+            }
+        },
+        parser : {      
+            getId : function (url){
+                return url.split("/").pop().split(".")[0];
+            },         
+            db : {
+                "www.ftxs.org" : {
+                    domain: "http://m.ftxs.org/",
+                    toc : function(url){
+                        return "wapbook-"+Parser.Novel.parser.getId(url)+"_1/";
+                    },
+                    fc : function(data){
+                        return /<li><a href='(\/wapbook-.*?\/)/g.exec(data)[1];
+                    },
+                    read : function(data){
+                        return /<div id="nr1">(.*?)<\/div>/g.exec(data)[1];
+                    },
+                    title : function(data){
+                        return /<div class="nr_title" id="nr_title">(.*?)<\/div>/g.exec(data)[1];
+                    }
+                }
+            },
+            read : function(title,provider,url){
+                var provider_ = this.db[provider];
+                Parser.ajax.get(provider_.domain+provider_.toc(url),function(data){
+                    Parser.Novel.parser.read_(title,provider,provider_.fc(data));
+                });
+            },
+            read_ : function(title,provider,url){                
+                var provider_ = this.db[provider];               
+                Parser.ajax.get(provider_.domain+url,function(data){
+                    var chapter = provider_.title(data);
+                    Parser.Novel.meta.set(title+" - "+chapter); 
+                    Parser.Novel.store.clear();
+                    Parser.Novel.novel.clear();
+                    Parser.Novel.novel.push(provider_.read(data));
+                    Parser.Novel.cache.save(title,chapter,provider,url);
+                });                
+            }
+        }
+    } 
+};
+Parser.Novel.index();
+document.getElementsByTagName("a")[0].onclick=function(){
+    Parser.Novel.index();
+};
+</script>
+</html>
