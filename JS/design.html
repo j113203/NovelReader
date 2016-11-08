@@ -206,8 +206,7 @@
             $.search.e.style.backgroundPosition="3vh";
             $.show($.search.i);
         },
-        ihandler:function(e){        
-            console.log();    
+        ihandler:function(e){          
             if (e.which==13&&this.value.length){                
                 $.loading.show("Google 搜尋");
                 $.search.search(this.value,function(data){
@@ -266,7 +265,11 @@
             if(this.offsetHeight + this.scrollTop == this.scrollHeight)
             {
                 this.onscroll="";
-               console.log("End");
+                $.novel.read__($.novel.cache.title,$.novel.cache.provider,$.novel.cache.next,function(e){
+                    $("novel").innerHTML+="<br>"+e.body;
+                    $.novel.cache=e;
+                    $.result.init();
+                });
             }
         },
         init:function(){
@@ -279,19 +282,28 @@
         },        
         db:{
             core:{
-                divfromId:function(data,id){
+                divFromId:function(data,id){
                     return new RegExp('id="'+id+'">(.*?)<\/div>',"g").exec(data)[1];
+                },
+                hrefFromId:function(data,id){
+                    return new RegExp('id="'+id+'" href="(.*?)">',"g").exec(data)[1];
                 }
             },
             template:{
-                a:function(domain,read,title){
+                a:function(domain,read,title,prev,next){
                     return {
                         "domain": domain,
-                        read:function(data){
-                            return $.novel.db.core.divfromId(data,read);
+                        "read":function(data){
+                            return $.novel.db.core.divFromId(data,read);
                         },
-                        title:function(data){
-                            return $.novel.db.core.divfromId(data,title);
+                        "title":function(data){
+                            return $.novel.db.core.divFromId(data,title);
+                        },
+                        "prev":function(data){
+                            return $.novel.db.core.hrefFromId(data,prev);
+                        },
+                        "next":function(data){
+                            return $.novel.db.core.hrefFromId(data,next);
                         }
                     }
                 }
@@ -305,24 +317,43 @@
                 $.novel.read_(title,provider,provider_.fc(data));
             });
         },
-        read_ : function(title,provider,url){                
-            var provider_ = this.db[provider];               
+        read_ : function(title,provider,url){
+            this.read__(title,provider,url,function(e){
+                $.loading.hide();
+                $("novel").innerHTML=e.body;
+                $.novel.cache=e;
+            });       
+        },
+        read__:function(title,provider,url,success){
+            var provider_ = this.db[provider];
             Parser.ajax.get(provider_.domain+url,function(data){
-                 $.loading.hide();                 
-                 $("novel").innerHTML="<h3>"+provider_.title(data)+"</h3><br>"+provider_.read(data);                
-            });            
-        }
+                 success({
+                    "title":title,
+                    "chapter":provider_.title(data),
+                    "provider":provider,
+                    "next":provider_.next(data),
+                    "prev":provider_.prev(data),
+                    "body":"<h3>"+title+" - "+provider_.title(data)+"</h3><br>"+provider_.read(data)
+                });
+            });   
+        },
+        cache:{}
     };
     $.init.do();
     $.result.clear();
     $.result.add("空空的書架",""); 
 
-    $.novel.db["www.ftxs.org"]=$.novel.db.template.a("http://m.ftxs.org/","nr1","nr_title");
+    $.novel.db["www.ftxs.org"]=$.novel.db.template.a("http://m.ftxs.org/","nr1","nr_title","pb_prev","pb_next");
     $.novel.db["www.ftxs.org"].toc=function(url){
        return "wapbook-"+$.novel.id(url)+"_1/";
     };
     $.novel.db["www.ftxs.org"].fc=function(data){
        return /<li><a href='(\/wapbook-.*?\/)/g.exec(data)[1];
     };
+    
+  //  $.novel.read__("最強裝逼打臉系統","www.ftxs.org","wapbook-106517-21071859/",function(e){
+    //    console.log(e);
+    //});
+
 </script>
 </html>
